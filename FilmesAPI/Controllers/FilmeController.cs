@@ -11,25 +11,30 @@ namespace FilmesAPI.Controllers
         private static List<Filme> filmes = new List<Filme>();
         private static int id = 1;
 
+        //Adiciona um dado, como um insert
         [HttpPost]
-        public void AdicionaFilme([FromBody] Filme filme)
+        public IActionResult AdicionaFilme([FromBody] Filme filme)
         {
             filme.Id = id++;
             filmes.Add(filme);
-            Console.WriteLine(filme.Titulo);
-            Console.WriteLine(filme.Duracao);
+           return CreatedAtAction(nameof(GetFilmeId), new {id = filme.Id }, filme); //Retorna pro usuário como ficou o dado que ele inseriu, de modo que facilite ele a buscar por esse dado nos método get por id
+     
         }
 
+        //Busca todos os dados de uma vez, ou de forma intervalada pelo skip e take.
         [HttpGet]
         public IEnumerable<Filme> GetFilmes([FromQuery] int skip =0, [FromQuery] int take =10) //Aqui diz que se o usuário n passar parametros, carregará 50 filmes. Se quiser recarregar tudo, basta tirar o skip e o take
         {
             return filmes.Skip(skip).Take(take);
         }
 
+        //Busca um dado por ID esepecífico
         [HttpGet("{id}")]
-        public Filme? GetFilmeId(int id)
+        public IActionResult GetFilmeId(int id)
         {
-            return filmes.FirstOrDefault(filme => filme.Id == id);
+            var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+            if(filme == null) return NotFound();
+            return Ok(filme);
         }
 
     }
