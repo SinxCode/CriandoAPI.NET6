@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 //CONECTANDO AO BANCO DE DADOS - "STRING DE CONEXÃO ESTÁ NO APPSETINGS.JSON"
-builder.Services.AddDbContext<FilmeContext>(opts =>  opts.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnextion")));
+
+builder.Services.AddDbContext<FilmeContext>(opts =>  opts.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection")));
 
 // Add services to the container.
 
