@@ -10,6 +10,7 @@ namespace FilmesAPI.Data
         {
             
         }
+        //Essa função DbSet é o que nos permite ter as funcionalidades do banco de dados.
         public DbSet<Filme> Filmes { get; set; }
     }
 }
