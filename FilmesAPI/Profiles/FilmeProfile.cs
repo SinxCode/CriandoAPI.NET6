@@ -6,7 +6,7 @@ namespace FilmesAPI.Profiles
 {
     public class FilmeProfile : Profile
     {
-        //Convertendo o FilmeDTO para Filme
+        //Convertendo o FilmeDTO para Filme e vice versa para as funcionalidades do Controller.
         public FilmeProfile()
         {
             CreateMap<CreateFilmeDto, Filme>();
